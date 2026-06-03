@@ -76,6 +76,16 @@ Admins may also exist as staff records linked to the same `User` model.
 
 ---
 
+## Database (MongoDB)
+
+- **Driver / ODM:** Mongoose in `backend/`
+- **Connection:** `MONGODB_URI` (default `mongodb://127.0.0.1:27017/gym-app`)
+- **Collections** map to the models below (e.g. `users`, `classSessions`, `appSettings`)
+
+Embedded documents and references (`ObjectId`) are used where it fits; exact schemas live in `backend/src/models/` as they are implemented.
+
+---
+
 ## Data models
 
 ### Settings
@@ -119,7 +129,7 @@ Admins may also exist as staff records linked to the same `User` model.
 
 ```
 app/ (Flutter) ──────┐
-                     ├──► backend/ (Node.js) ──► PostgreSQL (or equivalent)
+                     ├──► backend/ (Node.js) ──► MongoDB
 admin/ (Flutter) ────┘              └──► app_settings.feature_flags
                                     └──► Stripe (when payments on)
 ```
@@ -133,8 +143,9 @@ admin/ (Flutter) ────┘              └──► app_settings.feature_
 |-------|--------|--------|
 | Member / trainer app | Flutter (`app/`) | Role-based UI for member vs trainer |
 | Admin app | Flutter (`admin/`) | Desktop/web/mobile targets as needed |
-| API | Node.js (`backend/`) | Express; add PostgreSQL and auth in Phase 1 |
-| Auth | Backend + DB | |
+| API | Node.js (`backend/`) | Express + Mongoose; MongoDB |
+| Database | MongoDB | Single database; collections per model (see below) |
+| Auth | Backend + MongoDB | |
 | Payments | Stripe | Subscriptions + one-off when module enabled |
 
 ---
