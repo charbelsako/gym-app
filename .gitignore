@@ -1,0 +1,15 @@
+# Backend
+backend/node_modules/
+backend/.env
+
+# Flutter
+app/.dart_tool/
+app/build/
+admin/.dart_tool/
+admin/build/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.iml
